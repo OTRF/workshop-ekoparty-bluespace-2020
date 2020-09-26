@@ -1,0 +1,29 @@
+#######################################################################################
+# Book settings
+title: "Eko BlueSpace Workshop 2020"
+logo: images/logo.png
+author: Roberto Rodriguez @Cyb3rWard0g, Jose Rodriguez @Cyb3rPandaH
+email: ""
+description: >- # this means to ignore newlines until "baseurl:"
+  Un workshop para la comunidad de el Eko BlueSpace
+execute:
+  execute_notebooks: cache
+  run_in_temp: true
+
+html:
+  home_page_in_navbar: false
+  use_edit_page_button: true
+  use_repository_button: true
+  use_issues_button: true
+  baseurl: https://threathunterplaybook.com/
+
+repository:
+  url: https://github.com/OTRF/workshop-ekoparty-bluespace-2020
+  branch: master
+  path_to_book: docs
+
+launch_buttons:
+  notebook_interface: "classic" # The interface interactive links will activate ["classic", "jupyterlab"]
+  binderhub_url: "https://mybinder.org"
+  colab_url: "https://colab.research.google.com"
+  thebe: true
