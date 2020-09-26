@@ -15,7 +15,7 @@ html:
   use_edit_page_button: true
   use_repository_button: true
   use_issues_button: true
-  baseurl: https://threathunterplaybook.com/
+  baseurl: https://otrf.github.io/workshop-ekoparty-bluespace-2020/
 
 repository:
   url: https://github.com/OTRF/workshop-ekoparty-bluespace-2020

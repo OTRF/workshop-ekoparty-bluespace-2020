@@ -1,4 +1,9 @@
 - file: intro
 - part: Conceptos de Data Analisis
   chapters:
-  - file: conceptos-basicos/notebooks
+  - file: conceptos-basicos/1_intro_numpy_arrays
+  - file: conceptos-basicos/2_dataframe_desde_Set_datos_Mordor
+  - file: conceptos-basicos/3_Analisis_Datos_Pandas_Filtrando_Resumiendo_Datos
+  - file: conceptos-basicos/4_Analisis_Datos_Pandas_Transformando_Datos
+  - file: conceptos-basicos/5_Analisis_Datos_Pandas_Correlacionando_Datos
+  - file: conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos
