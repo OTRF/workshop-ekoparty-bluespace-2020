@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de Datos con Pandas - Visualizando Datos &#8212; Eko BlueSpace Workshop 2020</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://otrf.github.io/workshop-ekoparty-bluespace-2020/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Análisis de Datos con Pandas - Correlacionando Datos" href="5_Analisis_Datos_Pandas_Correlacionando_Datos.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://otrf.github.io/workshop-ekoparty-bluespace-2020/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Análisis de Datos con Pandas - Visualizando Datos" />
+<meta property="og:description" content="Análisis de Datos con Pandas - Visualizando Datos  Autor: Jose Rodriguez (@Cyb3rPandah)  Proyecto: Infosec Jupyter Book  Organización Pública: Open Threat Resea" />
+<meta property="og:image"       content="https://otrf.github.io/workshop-ekoparty-bluespace-2020/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Eko BlueSpace Workshop 2020</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Conceptos de Data Analisis
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_intro_numpy_arrays.html">
+   Introducción a NumPy Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_dataframe_desde_Set_datos_Mordor.html">
+   Creando un Dataframe desde un Set de Datos de Mordor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_Analisis_Datos_Pandas_Filtrando_Resumiendo_Datos.html">
+   Análisis de Datos con Pandas - Filtrando y Resumiendo Datos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_Analisis_Datos_Pandas_Transformando_Datos.html">
+   Análisis de Datos con Pandas - Transformando Datos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_Analisis_Datos_Pandas_Correlacionando_Datos.html">
+   Análisis de Datos con Pandas - Correlacionando Datos
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Análisis de Datos con Pandas - Visualizando Datos
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/OTRF/workshop-ekoparty-bluespace-2020"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/OTRF/workshop-ekoparty-bluespace-2020/issues/new?title=Issue%20on%20page%20%2Fconceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/OTRF/workshop-ekoparty-bluespace-2020/edit/master/docs/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/OTRF/workshop-ekoparty-bluespace-2020/master?urlpath=tree/docs/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/OTRF/workshop-ekoparty-bluespace-2020/blob/master/docs/conceptos-basicos/6_Analisis_Datos_Pandas_Visualizando_Datos.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#representando-el-archivo-json-como-dataframe-usando-pandas">
+   Representando el Archivo JSON como Dataframe usando Pandas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-importando-la-libreria-pandas">
+     a) Importando la librería Pandas
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-leyendo-archivo-json">
+     b) Leyendo Archivo JSON
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-conociendo-las-columnas-o-atributos-del-dataframe">
+     c) Conociendo las columnas o atributos del Dataframe
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#representando-la-variabilidad-de-la-longitud-del-commandline">
+   Representando la Variabilidad de la Longitud del CommandLine
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-calculando-la-longitud-del-command-line">
+     a) Calculando la Longitud del Command Line
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-creando-un-diagrama-boxplot-para-representar-la-variabilidad-por-usuario">
+     b) Creando un Diagrama BoxPlot para representar la variabilidad por Usuario
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#muchas-gracias-espero-que-este-notebooks-haya-sido-util-para-empezar-a-revisar-algunas-tecnicas-para-transformar-datos-d">
+   Muchas gracias!! Espero que este notebooks haya sido útil para empezar a revisar algunas técnicas para transformar datos :D
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aun-hay-mas-por-aprender-d">
+   Aún hay más por aprender :D
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="analisis-de-datos-con-pandas-visualizando-datos">
+<h1>Análisis de Datos con Pandas - Visualizando Datos<a class="headerlink" href="#analisis-de-datos-con-pandas-visualizando-datos" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><strong>Autor</strong>: Jose Rodriguez (&#64;Cyb3rPandah)</p></li>
+<li><p><strong>Proyecto</strong>: Infosec Jupyter Book</p></li>
+<li><p><strong>Organización Pública</strong>: <a class="reference external" href="https://github.com/OTRF">Open Threat Research</a></p></li>
+<li><p><strong>Licencia</strong>: <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p></li>
+<li><p><strong>Referencia</strong>: https://github.com/OTRF/mordor/tree/master/datasets/large/apt29/day1</p></li>
+</ul>
+<div class="section" id="representando-el-archivo-json-como-dataframe-usando-pandas">
+<h2>Representando el Archivo JSON como Dataframe usando Pandas<a class="headerlink" href="#representando-el-archivo-json-como-dataframe-usando-pandas" title="Permalink to this headline">¶</a></h2>
+<p>La representación del archivo JSON como un Dataframe de Pandas puede involucrar el uso de comandos como <strong>wget</strong>, <strong>unzip</strong>. Esto fue explicado con más detalle en el notebook que lleva por título <strong>Representando el Archivo JSON como Dataframe usando Pandas</strong>, y además se encuentra en la misma carpeta del presente notebook. Para mantener la estructura del presente notebok en un formato simple, los JSON files requeridos para este workshop ya han sido desargados y descomprimidos. Estos archivos se encuentran en la carpeta <strong>sets_datos</strong>.</p>
+<p>! wget https://github.com/OTRF/mordor/raw/master/datasets/large/apt29/day1/apt29_evals_day1_manual.zip  -O sets_datos/apt29_evals_day1_manual.zip</p>
+<p>! unzip -o sets_datos/apt29_evals_day1_manual.zip -d sets_datos/</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apt29_json</span> <span class="o">=</span> <span class="s1">&#39;sets_datos/apt29_evals_day1_manual_2020-05-01225525.json&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="a-importando-la-libreria-pandas">
+<h3>a) Importando la librería Pandas<a class="headerlink" href="#a-importando-la-libreria-pandas" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="b-leyendo-archivo-json">
+<h3>b) Leyendo Archivo JSON<a class="headerlink" href="#b-leyendo-archivo-json" title="Permalink to this headline">¶</a></h3>
+<p>Usaremos el método <strong>pandas.read_json</strong>.</p>
+<p>Referencia: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reading the json file using read_json method and considering the parameter lines = True</span>
+<span class="c1"># setting the chunksize parameter = 1000</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">apt29_json</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># creating an empty list to store data for every chunk</span>
+<span class="n">apt29_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># adding data of every chunk to an empty list using a for loop and the append method</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+    <span class="n">apt29_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="c1"># putting everything together into a Pandas dataframe using the concat method</span>
+<span class="c1"># considering the parameter sort = False</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">apt29_chunks</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="c-conociendo-las-columnas-o-atributos-del-dataframe">
+<h3>c) Conociendo las columnas o atributos del Dataframe<a class="headerlink" href="#c-conociendo-las-columnas-o-atributos-del-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>Usaremos el método <strong>pandas.DataFrame.info</strong>.</p>
+<p>Referencia: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="representando-la-variabilidad-de-la-longitud-del-commandline">
+<h2>Representando la Variabilidad de la Longitud del CommandLine<a class="headerlink" href="#representando-la-variabilidad-de-la-longitud-del-commandline" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-calculando-la-longitud-del-command-line">
+<h3>a) Calculando la Longitud del Command Line<a class="headerlink" href="#a-calculando-la-longitud-del-command-line" title="Permalink to this headline">¶</a></h3>
+<p>Usaremos el método <strong>assign</strong> para agregar una columna nueva a nuestro dataframe. Esta nueva columna mostrará el calculo de la longitud del command line que el processo utilizó.</p>
+<p>Referencia: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.assign.html</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;User&#39;</span><span class="p">]]</span>
+    
+<span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EventID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Channel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;sysmon&#39;</span><span class="p">,</span><span class="n">case</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">regex</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))]</span>
+    
+<span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Command_Length</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;CommandLine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">())</span>
+    
+<span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Command_Length&#39;</span><span class="p">]</span> <span class="o">&lt;</span><span class="mi">300</span><span class="p">]</span>
+
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="b-creando-un-diagrama-boxplot-para-representar-la-variabilidad-por-usuario">
+<h3>b) Creando un Diagrama BoxPlot para representar la variabilidad por Usuario<a class="headerlink" href="#b-creando-un-diagrama-boxplot-para-representar-la-variabilidad-por-usuario" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Especificamos la fuente de datos</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">df</span>
+
+<span class="c1"># Creamos el objeto Seaborn</span>
+<span class="n">boxPlotChart</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Command_Length&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">source</span><span class="p">,</span> <span class="n">orient</span> <span class="o">=</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Formateamos el Títutl ode nuestro gráfico</span>
+<span class="n">boxPlotChart</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Variabilidad de la Longitud de Command Lines por Usuario&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Formateamos el eje horizontal</span>
+<span class="n">boxPlotChart</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">boxPlotChart</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="muchas-gracias-espero-que-este-notebooks-haya-sido-util-para-empezar-a-revisar-algunas-tecnicas-para-transformar-datos-d">
+<h2>Muchas gracias!! Espero que este notebooks haya sido útil para empezar a revisar algunas técnicas para transformar datos :D<a class="headerlink" href="#muchas-gracias-espero-que-este-notebooks-haya-sido-util-para-empezar-a-revisar-algunas-tecnicas-para-transformar-datos-d" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="aun-hay-mas-por-aprender-d">
+<h2>Aún hay más por aprender :D<a class="headerlink" href="#aun-hay-mas-por-aprender-d" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "OTRF/workshop-ekoparty-bluespace-2020",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pyspark3"
+        },
+        kernelOptions: {
+            kernelName: "pyspark3",
+            path: "./conceptos-basicos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pyspark3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="5_Analisis_Datos_Pandas_Correlacionando_Datos.html" title="previous page">Análisis de Datos con Pandas - Correlacionando Datos</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Roberto Rodriguez @Cyb3rWard0g, Jose Rodriguez @Cyb3rPandaH<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
