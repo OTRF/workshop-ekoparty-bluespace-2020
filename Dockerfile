@@ -1,7 +1,7 @@
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
 # License: GPL-3.0
 
-FROM cyb3rward0g/jupyter-base:0.0.6
+FROM cyb3rward0g/jupyter-base:0.0.7
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile Eko Bluespace Workshop."
 
