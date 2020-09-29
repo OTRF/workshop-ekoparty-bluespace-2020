@@ -22,6 +22,10 @@ Desde una perspectiva de seguridad defensiva, incluso después de comprender có
 
 ## [https://otrf.github.io/workshop-ekoparty-bluespace-2020/intro.html](https://otrf.github.io/workshop-ekoparty-bluespace-2020/intro.html)
 
+## Slides
+
+## [https://github.com/OTRF/workshop-ekoparty-bluespace-2020/blob/master/Jupyter-BlueSpace-Slides-2020.pdf](https://github.com/OTRF/workshop-ekoparty-bluespace-2020/blob/master/Jupyter-BlueSpace-Slides-2020.pdf)
+
 ## Agenda
 
 <table>
