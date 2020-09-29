@@ -289,16 +289,16 @@
 <li><p><strong>Proyecto</strong>: Infosec Jupyter Book</p></li>
 <li><p><strong>Organización Pública</strong>: <a class="reference external" href="https://github.com/OTRF">Open Threat Research</a></p></li>
 <li><p><strong>Licencia</strong>: <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p></li>
-<li><p><strong>Referencia</strong>: https://github.com/OTRF/mordor/tree/master/datasets/large/apt29/day1</p></li>
+<li><p><strong>Referencia</strong>: https://mordordatasets.com/notebooks/small/windows/05_defense_evasion/SDWIN-190403133337.html</p></li>
 </ul>
 <div class="section" id="representando-el-archivo-json-como-dataframe-usando-pandas">
 <h2>Representando el Archivo JSON como Dataframe usando Pandas<a class="headerlink" href="#representando-el-archivo-json-como-dataframe-usando-pandas" title="Permalink to this headline">¶</a></h2>
 <p>La representación del archivo JSON como un Dataframe de Pandas puede involucrar el uso de comandos como <strong>wget</strong>, <strong>unzip</strong>. Esto fue explicado con más detalle en el notebook que lleva por título <strong>Representando el Archivo JSON como Dataframe usando Pandas</strong>, y además se encuentra en la misma carpeta del presente notebook. Para mantener la estructura del presente notebok en un formato simple, los JSON files requeridos para este workshop ya han sido desargados y descomprimidos. Estos archivos se encuentran en la carpeta <strong>sets_datos</strong>.</p>
-<p>! wget https://github.com/OTRF/mordor/raw/master/datasets/large/apt29/day1/apt29_evals_day1_manual.zip  -O sets_datos/apt29_evals_day1_manual.zip</p>
-<p>! unzip -o sets_datos/apt29_evals_day1_manual.zip -d sets_datos/</p>
+<p>! wget https://raw.githubusercontent.com/OTRF/mordor/master/datasets/small/windows/lateral_movement/host/empire_shell_dcerpc_smb_service_dll_hijack.zip  -O sets_datos/empire_shell_dcerpc_smb_service_dll_hijack.zip</p>
+<p>! unzip -o sets_datos/empire_shell_dcerpc_smb_service_dll_hijack.zip -d sets_datos/</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apt29_json</span> <span class="o">=</span> <span class="s1">&#39;sets_datos/apt29_evals_day1_manual_2020-05-01225525.json&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dllhijack_json</span> <span class="o">=</span> <span class="s1">&#39;sets_datos/empire_shell_dcerpc_smb_service_dll_hijack_2020-09-21232839.json&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -319,18 +319,8 @@
 <p>Referencia: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reading the json file using read_json method and considering the parameter lines = True</span>
-<span class="c1"># setting the chunksize parameter = 1000</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">apt29_json</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="c1"># creating an empty list to store data for every chunk</span>
-<span class="n">apt29_chunks</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1"># adding data of every chunk to an empty list using a for loop and the append method</span>
-<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
-    <span class="n">apt29_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-<span class="c1"># putting everything together into a Pandas dataframe using the concat method</span>
-<span class="c1"># considering the parameter sort = False</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">apt29_chunks</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="c1"># visualizing the first five records of the Pandas dataframe using the head method</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">path_or_buf</span> <span class="o">=</span> <span class="n">dllhijack_json</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -354,42 +344,42 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>EventTime</th>
-      <th>port</th>
-      <th>Message</th>
-      <th>SourceThreadId</th>
+      <th>Keywords</th>
+      <th>SeverityValue</th>
+      <th>TargetObject</th>
+      <th>EventTypeOrignal</th>
       <th>EventID</th>
-      <th>TargetProcessId</th>
-      <th>SourceModuleName</th>
-      <th>tags</th>
-      <th>@version</th>
-      <th>SourceImage</th>
+      <th>ProviderGuid</th>
+      <th>ExecutionProcessID</th>
+      <th>host</th>
+      <th>Channel</th>
+      <th>UserID</th>
       <th>...</th>
-      <th>Flags</th>
-      <th>SecurityOptions</th>
-      <th>RemoteAddresses</th>
-      <th>Active</th>
-      <th>ProfileChanged</th>
-      <th>param10</th>
-      <th>param6</th>
-      <th>param8</th>
-      <th>param9</th>
-      <th>param11</th>
+      <th>KeyType</th>
+      <th>ClientProcessId</th>
+      <th>AlgorithmName</th>
+      <th>ReturnCode</th>
+      <th>KeyName</th>
+      <th>KeyFilePath</th>
+      <th>MiniportNameLen</th>
+      <th>MiniportName</th>
+      <th>param4</th>
+      <th>param3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2020-05-01 22:55:23</td>
-      <td>60737</td>
-      <td>Process accessed:\r\nRuleName: -\r\nUtcTime: 2...</td>
-      <td>504.0</td>
-      <td>10</td>
-      <td>2092</td>
-      <td>eventlog</td>
-      <td>[mordorDataset]</td>
-      <td>1</td>
-      <td>C:\windows\system32\svchost.exe</td>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>HKU\.DEFAULT\Software\Microsoft\Office\16.0\Co...</td>
+      <td>INFO</td>
+      <td>13</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3172</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -404,16 +394,16 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>2020-05-01 22:55:23</td>
-      <td>60737</td>
-      <td>Process accessed:\r\nRuleName: -\r\nUtcTime: 2...</td>
-      <td>504.0</td>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>10</td>
-      <td>2092</td>
-      <td>eventlog</td>
-      <td>[mordorDataset]</td>
-      <td>1</td>
-      <td>C:\windows\system32\svchost.exe</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3392</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -428,16 +418,16 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>2020-05-01 22:55:23</td>
-      <td>60737</td>
-      <td>Process accessed:\r\nRuleName: -\r\nUtcTime: 2...</td>
-      <td>972.0</td>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>10</td>
-      <td>2092</td>
-      <td>eventlog</td>
-      <td>[mordorDataset]</td>
-      <td>1</td>
-      <td>C:\windows\system32\svchost.exe</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3392</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -452,16 +442,16 @@
     </tr>
     <tr>
       <th>3</th>
-      <td>2020-05-01 22:55:23</td>
-      <td>60737</td>
-      <td>Process accessed:\r\nRuleName: -\r\nUtcTime: 2...</td>
-      <td>972.0</td>
-      <td>10</td>
-      <td>2092</td>
-      <td>eventlog</td>
-      <td>[mordorDataset]</td>
-      <td>1</td>
-      <td>C:\windows\system32\svchost.exe</td>
+      <td>-9214364837600034816</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5158</td>
+      <td>{54849625-5478-4994-A5BA-3E3B0328C30D}</td>
+      <td>4</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>security</td>
+      <td>NaN</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -476,16 +466,16 @@
     </tr>
     <tr>
       <th>4</th>
-      <td>2020-05-01 22:55:24</td>
-      <td>60737</td>
-      <td>Process accessed:\r\nRuleName: -\r\nUtcTime: 2...</td>
-      <td>5792.0</td>
-      <td>10</td>
-      <td>2980</td>
-      <td>eventlog</td>
-      <td>[mordorDataset]</td>
-      <td>1</td>
-      <td>C:\windows\system32\svchost.exe</td>
+      <td>-9214364837600034816</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5156</td>
+      <td>{54849625-5478-4994-A5BA-3E3B0328C30D}</td>
+      <td>4</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>security</td>
+      <td>NaN</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -500,7 +490,7 @@
     </tr>
   </tbody>
 </table>
-<p>5 rows × 388 columns</p>
+<p>5 rows × 206 columns</p>
 </div></div></div>
 </div>
 </div>
@@ -516,400 +506,218 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 196081 entries, 0 to 196080
-Data columns (total 388 columns):
- #   Column                           Dtype  
----  ------                           -----  
- 0   EventTime                        object 
- 1   port                             int64  
- 2   Message                          object 
- 3   SourceThreadId                   float64
- 4   EventID                          int64  
- 5   TargetProcessId                  object 
- 6   SourceModuleName                 object 
- 7   tags                             object 
- 8   @version                         int64  
- 9   SourceImage                      object 
- 10  SourceName                       object 
- 11  AccountType                      object 
- 12  TargetImage                      object 
- 13  host                             object 
- 14  Task                             int64  
- 15  ThreadID                         int64  
- 16  EventReceivedTime                object 
- 17  CallTrace                        object 
- 18  Domain                           object 
- 19  UtcTime                          object 
- 20  Keywords                         int64  
- 21  RecordNumber                     int64  
- 22  SourceProcessId                  object 
- 23  SourceModuleType                 object 
- 24  @timestamp                       object 
- 25  SeverityValue                    int64  
- 26  Version                          float64
- 27  OpcodeValue                      float64
- 28  Severity                         object 
- 29  Channel                          object 
- 30  AccountName                      object 
- 31  GrantedAccess                    object 
- 32  SourceProcessGUID                object 
- 33  EventType                        object 
- 34  UserID                           object 
- 35  TargetProcessGUID                object 
- 36  ProcessId                        object 
- 37  Hostname                         object 
- 38  RuleName                         object 
- 39  ExecutionProcessID               int64  
- 40  ProviderGuid                     object 
- 41  Opcode                           object 
- 42  Application                      object 
- 43  RemoteMachineID                  object 
- 44  Category                         object 
- 45  DestPort                         float64
- 46  DestAddress                      object 
- 47  SourceAddress                    object 
- 48  SourcePort                       float64
- 49  Protocol                         object 
- 50  Direction                        object 
- 51  FilterRTID                       float64
- 52  LayerRTID                        float64
- 53  RemoteUserID                     object 
- 54  LayerName                        object 
- 55  DestinationIsIpv6                object 
- 56  DestinationHostname              object 
- 57  DestinationIp                    object 
- 58  DestinationPortName              object 
- 59  DestinationPort                  float64
- 60  SourceIsIpv6                     object 
- 61  Initiated                        object 
- 62  ProcessGuid                      object 
- 63  SourceIp                         object 
- 64  SourcePortName                   object 
- 65  SourceHostname                   object 
- 66  Image                            object 
- 67  User                             object 
- 68  TargetFilename                   object 
- 69  CreationUtcTime                  object 
- 70  SubjectLogonId                   object 
- 71  ProcessName                      object 
- 72  SubjectUserSid                   object 
- 73  SubjectUserName                  object 
- 74  SubjectDomainName                object 
- 75  Status                           object 
- 76  TargetObject                     object 
- 77  Details                          object 
- 78  ImageLoaded                      object 
- 79  Product                          object 
- 80  SignatureStatus                  object 
- 81  Description                      object 
- 82  Signature                        object 
- 83  Signed                           object 
- 84  FileVersion                      object 
- 85  Company                          object 
- 86  OriginalFileName                 object 
- 87  Hashes                           object 
- 88  PipeName                         object 
- 89  TargetLogonId                    object 
- 90  EnabledPrivilegeList             object 
- 91  TargetDomainName                 object 
- 92  TargetUserSid                    object 
- 93  TargetUserName                   object 
- 94  DisabledPrivilegeList            object 
- 95  PrivilegeList                    object 
- 96  RestrictedAdminMode              object 
- 97  VirtualAccount                   object 
- 98  ElevatedToken                    object 
- 99  LmPackageName                    object 
- 100 TransmittedServices              object 
- 101 ImpersonationLevel               object 
- 102 TargetLinkedLogonId              object 
- 103 WorkstationName                  object 
- 104 TargetOutboundUserName           object 
- 105 LogonProcessName                 object 
- 106 IpAddress                        object 
- 107 AuthenticationPackageName        object 
- 108 LogonGuid                        object 
- 109 KeyLength                        float64
- 110 TargetOutboundDomainName         object 
- 111 LogonType                        float64
- 112 IpPort                           object 
- 113 EventCountTotal                  float64
- 114 GroupMembership                  object 
- 115 EventIdx                         float64
- 116 ParentProcessGuid                object 
- 117 ParentCommandLine                object 
- 118 LogonId                          object 
- 119 IntegrityLevel                   object 
- 120 TerminalSessionId                float64
- 121 CommandLine                      object 
- 122 CurrentDirectory                 object 
- 123 ParentProcessId                  float64
- 124 ParentImage                      object 
- 125 NewProcessName                   object 
- 126 MandatoryLabel                   object 
- 127 ParentProcessName                object 
- 128 TokenElevationType               object 
- 129 NewProcessId                     object 
- 130 ObjectServer                     object 
- 131 Service                          object 
- 132 TargetHandleId                   object 
- 133 SourceHandleId                   object 
- 134 HandleId                         object 
- 135 ObjectType                       object 
- 136 RestrictedSidCount               float64
- 137 AccessReason                     object 
- 138 TransactionId                    object 
- 139 AccessList                       object 
- 140 AccessMask                       object 
- 141 ResourceAttributes               object 
- 142 ObjectName                       object 
- 143 QueryName                        object 
- 144 QueryResults                     object 
- 145 QueryStatus                      float64
- 146 ActivityID                       object 
- 147 param1                           object 
- 148 param2                           object 
- 149 ScriptBlockText                  object 
- 150 MessageNumber                    float64
- 151 MessageTotal                     float64
- 152 ScriptBlockId                    object 
- 153 Payload                          object 
- 154 ContextInfo                      object 
- 155 Archived                         object 
- 156 IsExecutable                     object 
- 157 ShareLocalPath                   object 
- 158 ShareName                        object 
- 159 RelativeTargetName               object 
- 160 Device                           object 
- 161 NewSd                            object 
- 162 OldSd                            object 
- 163 PreviousCreationUtcTime          object 
- 164 Path                             object 
- 165 ReturnCode                       object 
- 166 KeyFilePath                      object 
- 167 AlgorithmName                    object 
- 168 Operation                        object 
- 169 ClientProcessId                  float64
- 170 ProviderName                     object 
- 171 KeyType                          object 
- 172 ClientCreationTime               object 
- 173 KeyName                          object 
- 174 ProcessingMode                   float64
- 175 SupportInfo1                     float64
- 176 SupportInfo2                     float64
- 177 ProcessingTimeInMilliseconds     float64
- 178 DCName                           object 
- 179 TaskName                         object 
- 180 TaskContentNew                   object 
- 181 MiniportNameLen                  float64
- 182 MiniportName                     object 
- 183 KeysUpdated                      float64
- 184 HiveNameLength                   float64
- 185 HiveName                         object 
- 186 DirtyPages                       float64
- 187 Conditions                       object 
- 188 UserSid                          object 
- 189 FilterKey                        object 
- 190 CalloutName                      object 
- 191 CalloutKey                       object 
- 192 LayerKey                         object 
- 193 ProviderKey                      object 
- 194 UserName                         object 
- 195 FilterName                       object 
- 196 ChangeType                       object 
- 197 Weight                           float64
- 198 FilterType                       object 
- 199 Action                           object 
- 200 LayerId                          float64
- 201 FilterId                         float64
- 202 Properties                       object 
- 203 AdditionalInfo2                  object 
- 204 AdditionalInfo                   object 
- 205 OperationType                    object 
- 206 CallerProcessId                  object 
- 207 TargetSid                        object 
- 208 CallerProcessName                object 
- 209 TicketOptions                    object 
- 210 ServiceName                      object 
- 211 ServiceSid                       object 
- 212 TicketEncryptionType             object 
- 213 ServiceFileName                  object 
- 214 ServiceAccount                   object 
- 215 ServiceStartType                 float64
- 216 ServiceType                      object 
- 217 StartType                        object 
- 218 ImagePath                        object 
- 219 StartAddress                     object 
- 220 StartModule                      object 
- 221 TargetProcessGuid                object 
- 222 NewThreadId                      float64
- 223 SourceProcessGuid                object 
- 224 StartFunction                    object 
- 225 TargetName                       object 
- 226 ProcessCreationTime              object 
- 227 CountOfCredentialsReturned       float64
- 228 ReadOperation                    object 
- 229 Type                             float64
- 230 MaxRunspaces                     float64
- 231 InstanceId                       object 
- 232 MinRunspaces                     float64
- 233 UserData                         object 
- 234 TargetLogonGuid                  object 
- 235 TargetInfo                       object 
- 236 TargetServerName                 object 
- 237 PreAuthType                      float64
- 238 ObjectValueName                  object 
- 239 OldValueType                     object 
- 240 NewValueType                     object 
- 241 OldValue                         object 
- 242 NewValue                         object 
- 243 param7                           object 
- 244 param5                           object 
- 245 param3                           object 
- 246 param4                           object 
- 247 TSId                             float64
- 248 InterfaceGuid                    object 
- 249 NewProfile                       float64
- 250 InterfaceName                    object 
- 251 OldProfile                       float64
- 252 SettingValueSize                 float64
- 253 ModifyingUser                    object 
- 254 SettingValueDisplay              object 
- 255 SettingValue                     float64
- 256 Origin                           float64
- 257 SettingType                      float64
- 258 NewTime                          object 
- 259 OldTime                          object 
- 260 Reason                           float64
- 261 DwordVal                         float64
- 262 ShutdownReason                   float64
- 263 ShutdownEventCode                float64
- 264 ShutdownActionType               float64
- 265 StopTime                         object 
- 266 QfeVersion                       float64
- 267 BuildVersion                     float64
- 268 ServiceVersion                   float64
- 269 MajorVersion                     float64
- 270 MinorVersion                     float64
- 271 BootMode                         float64
- 272 StartTime                        object 
- 273 EnableDisableReason              float64
- 274 VsmPolicy                        float64
- 275 LastShutdownGood                 object 
- 276 LastBootGood                     object 
- 277 BootStatusPolicy                 float64
- 278 LastBootId                       float64
- 279 BootMenuPolicy                   float64
- 280 LoadOptions                      object 
- 281 BootType                         float64
- 282 EntryCount                       float64
- 283 BitlockerUserInputTime           float64
- 284 CountOld                         float64
- 285 CountNew                         float64
- 286 EnabledNew                       object 
- 287 UpdateReason                     float64
- 288 DeviceName                       object 
- 289 DeviceNameLength                 float64
- 290 DeviceTime                       object 
- 291 DeviceVersionMajor               float64
- 292 DeviceVersionMinor               float64
- 293 FinalStatus                      object 
- 294 CorruptionActionState            float64
- 295 DriveName                        object 
- 296 State                            object 
- 297 VersionLen                       float64
- 298 Number                           float64
- 299 MinimumPerformancePercent        float64
- 300 MinimumThrottlePercent           float64
- 301 NominalFrequency                 float64
- 302 Group                            float64
- 303 PerformanceImplementation        float64
- 304 IdleStateCount                   float64
- 305 MaximumPerformancePercent        float64
- 306 IdleImplementation               float64
- 307 Config                           float64
- 308 IsTestConfig                     float64
- 309 Default SD String:               object 
- 310 TimeSource                       object 
- 311 DnsServerList                    object 
- 312 ErrorCode                        float64
- 313 Sent UpdateServer                object 
- 314 AdapterName                      object 
- 315 AdapterSuffixName                object 
- 316 Ipaddress                        object 
- 317 PreviousTime                     object 
- 318 TargetProcessName                object 
- 319 FlightSigning                    object 
- 320 HypervisorDebug                  object 
- 321 HypervisorLoadOptions            object 
- 322 RemoteEventLogging               object 
- 323 DisableIntegrityChecks           object 
- 324 KernelDebug                      object 
- 325 HypervisorLaunchType             object 
- 326 AdvancedOptions                  object 
- 327 ConfigAccessPolicy               object 
- 328 TestSigning                      object 
- 329 VsmLaunchType                    object 
- 330 SecurityPackageName              object 
- 331 PuaPolicyId                      object 
- 332 PuaCount                         float64
- 333 NotificationPackageName          object 
- 334 TimeSourceRefId                  float64
- 335 CurrentStratumNumber             float64
- 336 SubLayerName                     object 
- 337 SubLayerType                     object 
- 338 SubLayerKey                      object 
- 339 ProviderType                     object 
- 340 CalloutType                      object 
- 341 CalloutId                        float64
- 342 ProviderContextType              object 
- 343 ProviderContextName              object 
- 344 ProviderContextKey               object 
- 345 ReasonForRejection               object 
- 346 RuleId                           object 
- 347 Profile                          object 
- 348 RuleAttr                         object 
- 349 Hash                             object 
- 350 SchemaVersion                    float64
- 351 MulticastFlowsEnabled            object 
- 352 LogSuccessfulConnectionsEnabled  object 
- 353 LogDroppedPacketsEnabled         object 
- 354 RemoteAdminEnabled               object 
- 355 GroupPolicyApplied               object 
- 356 OperationMode                    object 
- 357 ProfileUsed                      object 
- 358 ActiveProfile                    object 
- 359 FileName                         object 
- 360 LinkName                         object 
- 361 DeviceDescription                object 
- 362 LocationInformation              object 
- 363 ClassId                          object 
- 364 ClassName                        object 
- 365 DeviceId                         object 
- 366 VendorIds                        object 
- 367 CompatibleIds                    object 
- 368 Workstation                      object 
- 369 PackageName                      object 
- 370 ModifyingApplication             object 
- 371 LocalOnlyMapped                  float64
- 372 Profiles                         float64
- 373 LocalAddresses                   object 
- 374 RuleStatus                       float64
- 375 LooseSourceMapped                float64
- 376 EdgeTraversal                    float64
- 377 EmbeddedContext                  object 
- 378 Flags                            float64
- 379 SecurityOptions                  float64
- 380 RemoteAddresses                  object 
- 381 Active                           float64
- 382 ProfileChanged                   object 
- 383 param10                          object 
- 384 param6                           object 
- 385 param8                           object 
- 386 param9                           object 
- 387 param11                          object 
-dtypes: float64(96), int64(9), object(283)
-memory usage: 580.4+ MB
+RangeIndex: 6349 entries, 0 to 6348
+Data columns (total 206 columns):
+ #   Column                     Dtype  
+---  ------                     -----  
+ 0   Keywords                   int64  
+ 1   SeverityValue              int64  
+ 2   TargetObject               object 
+ 3   EventTypeOrignal           object 
+ 4   EventID                    int64  
+ 5   ProviderGuid               object 
+ 6   ExecutionProcessID         int64  
+ 7   host                       object 
+ 8   Channel                    object 
+ 9   UserID                     object 
+ 10  AccountType                object 
+ 11  ThreadID                   int64  
+ 12  ProcessGuid                object 
+ 13  Details                    object 
+ 14  EventReceivedTime          object 
+ 15  Opcode                     object 
+ 16  EventTime                  object 
+ 17  @timestamp                 object 
+ 18  SourceModuleType           object 
+ 19  port                       int64  
+ 20  AccountName                object 
+ 21  RecordNumber               int64  
+ 22  Task                       int64  
+ 23  Domain                     object 
+ 24  @version                   int64  
+ 25  OpcodeValue                float64
+ 26  SourceModuleName           object 
+ 27  Severity                   object 
+ 28  SourceName                 object 
+ 29  Version                    float64
+ 30  Image                      object 
+ 31  Category                   object 
+ 32  UtcTime                    object 
+ 33  Hostname                   object 
+ 34  RuleName                   object 
+ 35  tags                       object 
+ 36  SourceImage                object 
+ 37  SourceProcessGUID          object 
+ 38  TargetImage                object 
+ 39  GrantedAccess              object 
+ 40  EventType                  object 
+ 41  SourceProcessId            object 
+ 42  SourceThreadId             float64
+ 43  TargetProcessGUID          object 
+ 44  TargetProcessId            object 
+ 45  CallTrace                  object 
+ 46  Application                object 
+ 47  ProcessId                  object 
+ 48  Message                    object 
+ 49  FilterRTID                 float64
+ 50  LayerRTID                  float64
+ 51  Protocol                   object 
+ 52  SourcePort                 float64
+ 53  LayerName                  object 
+ 54  SourceAddress              object 
+ 55  RemoteUserID               object 
+ 56  Direction                  object 
+ 57  DestPort                   float64
+ 58  DestAddress                object 
+ 59  RemoteMachineID            object 
+ 60  ActivityID                 object 
+ 61  Payload                    object 
+ 62  ERROR_EVT_UNRESOLVED       float64
+ 63  ContextInfo                object 
+ 64  ImageLoaded                object 
+ 65  Signed                     object 
+ 66  SignatureStatus            object 
+ 67  Hashes                     object 
+ 68  Description                object 
+ 69  Company                    object 
+ 70  FileVersion                object 
+ 71  Signature                  object 
+ 72  Product                    object 
+ 73  OriginalFileName           object 
+ 74  SubjectDomainName          object 
+ 75  SubjectUserSid             object 
+ 76  SubjectLogonId             object 
+ 77  TaskContentNew             object 
+ 78  SubjectUserName            object 
+ 79  TaskName                   object 
+ 80  ProcessName                object 
+ 81  Status                     object 
+ 82  RuleAttr                   object 
+ 83  RuleId                     object 
+ 84  ChangeType                 object 
+ 85  FilterKey                  object 
+ 86  FilterType                 object 
+ 87  FilterName                 object 
+ 88  Weight                     float64
+ 89  UserName                   object 
+ 90  LayerId                    float64
+ 91  Action                     object 
+ 92  CalloutKey                 object 
+ 93  CalloutName                object 
+ 94  FilterId                   float64
+ 95  UserSid                    object 
+ 96  ProviderName               object 
+ 97  LayerKey                   object 
+ 98  ProviderKey                object 
+ 99  Conditions                 object 
+ 100 PrivilegeList              object 
+ 101 TargetLogonId              object 
+ 102 LogonType                  float64
+ 103 VirtualAccount             object 
+ 104 LogonGuid                  object 
+ 105 AuthenticationPackageName  object 
+ 106 IpAddress                  object 
+ 107 TransmittedServices        object 
+ 108 LmPackageName              object 
+ 109 ImpersonationLevel         object 
+ 110 ElevatedToken              object 
+ 111 WorkstationName            object 
+ 112 TargetOutboundUserName     object 
+ 113 TargetOutboundDomainName   object 
+ 114 LogonProcessName           object 
+ 115 KeyLength                  float64
+ 116 TargetLinkedLogonId        object 
+ 117 RestrictedAdminMode        object 
+ 118 TargetUserName             object 
+ 119 IpPort                     object 
+ 120 TargetUserSid              object 
+ 121 TargetDomainName           object 
+ 122 EventIdx                   float64
+ 123 GroupMembership            object 
+ 124 EventCountTotal            float64
+ 125 TargetFilename             object 
+ 126 CreationUtcTime            object 
+ 127 SourceHandleId             object 
+ 128 TargetHandleId             object 
+ 129 ObjectServer               object 
+ 130 HandleId                   object 
+ 131 TransactionId              object 
+ 132 AccessMask                 object 
+ 133 ObjectName                 object 
+ 134 ObjectType                 object 
+ 135 AccessReason               object 
+ 136 AccessList                 object 
+ 137 RestrictedSidCount         float64
+ 138 ResourceAttributes         object 
+ 139 EnabledPrivilegeList       object 
+ 140 DisabledPrivilegeList      object 
+ 141 ShareName                  object 
+ 142 ShareLocalPath             object 
+ 143 RelativeTargetName         object 
+ 144 SourcePortName             object 
+ 145 DestinationPort            float64
+ 146 User                       object 
+ 147 SourceHostname             object 
+ 148 DestinationIp              object 
+ 149 SourceIp                   object 
+ 150 DestinationIsIpv6          object 
+ 151 Initiated                  object 
+ 152 SourceIsIpv6               object 
+ 153 DestinationPortName        object 
+ 154 DestinationHostname        object 
+ 155 ParentImage                object 
+ 156 CommandLine                object 
+ 157 CurrentDirectory           object 
+ 158 IntegrityLevel             object 
+ 159 TerminalSessionId          float64
+ 160 ParentProcessGuid          object 
+ 161 ParentCommandLine          object 
+ 162 ParentProcessId            float64
+ 163 LogonId                    object 
+ 164 Device                     object 
+ 165 NewSd                      object 
+ 166 OldSd                      object 
+ 167 MandatoryLabel             object 
+ 168 ParentProcessName          object 
+ 169 NewProcessName             object 
+ 170 TokenElevationType         object 
+ 171 NewProcessId               object 
+ 172 PipeName                   object 
+ 173 Properties                 object 
+ 174 OperationType              object 
+ 175 AdditionalInfo             object 
+ 176 Path                       object 
+ 177 Priority                   float64
+ 178 Service                    object 
+ 179 ServiceName                object 
+ 180 TicketEncryptionType       object 
+ 181 ServiceSid                 object 
+ 182 TicketOptions              object 
+ 183 QueryResults               object 
+ 184 QueryName                  object 
+ 185 QueryStatus                float64
+ 186 IsExecutable               object 
+ 187 Archived                   object 
+ 188 param1                     object 
+ 189 param2                     object 
+ 190 MessageNumber              float64
+ 191 ScriptBlockText            object 
+ 192 MessageTotal               float64
+ 193 ScriptBlockId              object 
+ 194 Operation                  object 
+ 195 ClientCreationTime         object 
+ 196 KeyType                    object 
+ 197 ClientProcessId            float64
+ 198 AlgorithmName              object 
+ 199 ReturnCode                 object 
+ 200 KeyName                    object 
+ 201 KeyFilePath                object 
+ 202 MiniportNameLen            float64
+ 203 MiniportName               object 
+ 204 param4                     object 
+ 205 param3                     object 
+dtypes: float64(25), int64(9), object(172)
+memory usage: 10.0+ MB
 </pre></div>
 </div>
 </div>
@@ -963,34 +771,34 @@ memory usage: 580.4+ MB
   </thead>
   <tbody>
     <tr>
-      <th>372</th>
-      <td>2020-05-02T02:55:57.730Z</td>
-      <td>C:\ProgramData\victim\â€®cod.3aka3.scr</td>
-      <td>"C:\ProgramData\victim\â€®cod.3aka3.scr" /S</td>
+      <th>661</th>
+      <td>2020-09-22T03:29:33.845Z</td>
+      <td>C:\Windows\System32\svchost.exe</td>
+      <td>C:\windows\system32\svchost.exe -k appmodel -p...</td>
     </tr>
     <tr>
-      <th>621</th>
-      <td>2020-05-02T02:56:05.822Z</td>
-      <td>C:\Windows\System32\conhost.exe</td>
-      <td>\\?\C:\windows\system32\conhost.exe --headless...</td>
+      <th>1034</th>
+      <td>2020-09-22T03:30:11.221Z</td>
+      <td>C:\Program Files (x86)\Microsoft Office\root\O...</td>
+      <td>"C:\Program Files (x86)\Microsoft Office\root\...</td>
     </tr>
     <tr>
-      <th>649</th>
-      <td>2020-05-02T02:56:05.830Z</td>
-      <td>C:\Windows\System32\cmd.exe</td>
-      <td>"C:\windows\system32\cmd.exe"</td>
+      <th>1181</th>
+      <td>2020-09-22T03:30:11.292Z</td>
+      <td>C:\Program Files (x86)\Microsoft Office\root\O...</td>
+      <td>"C:\Program Files (x86)\Microsoft Office\Root\...</td>
     </tr>
     <tr>
-      <th>827</th>
-      <td>2020-05-02T02:56:15.884Z</td>
-      <td>C:\Windows\System32\WindowsPowerShell\v1.0\pow...</td>
-      <td>powershell</td>
+      <th>5019</th>
+      <td>2020-09-22T03:31:11.219Z</td>
+      <td>C:\Windows\System32\sc.exe</td>
+      <td>"C:\windows\system32\sc.exe" \\WORKSTATION6 st...</td>
     </tr>
     <tr>
-      <th>3620</th>
-      <td>2020-05-02T02:57:02.831Z</td>
-      <td>C:\Windows\System32\SearchProtocolHost.exe</td>
-      <td>"C:\windows\system32\SearchProtocolHost.exe" G...</td>
+      <th>5315</th>
+      <td>2020-09-22T03:31:41.475Z</td>
+      <td>C:\Windows\System32\sc.exe</td>
+      <td>"C:\windows\system32\sc.exe" \\WORKSTATION6 qu...</td>
     </tr>
   </tbody>
 </table>
@@ -1040,85 +848,56 @@ memory usage: 580.4+ MB
   </thead>
   <tbody>
     <tr>
-      <th>372</th>
-      <td>2020-05-02T02:55:57.730Z</td>
-      <td>C:\ProgramData\victim\â€®cod.3aka3.scr</td>
-      <td>"C:\ProgramData\victim\â€®cod.3aka3.scr" /S</td>
-      <td>43.0</td>
+      <th>661</th>
+      <td>2020-09-22T03:29:33.845Z</td>
+      <td>C:\Windows\System32\svchost.exe</td>
+      <td>C:\windows\system32\svchost.exe -k appmodel -p...</td>
+      <td>56.0</td>
     </tr>
     <tr>
-      <th>621</th>
-      <td>2020-05-02T02:56:05.822Z</td>
-      <td>C:\Windows\System32\conhost.exe</td>
-      <td>\\?\C:\windows\system32\conhost.exe --headless...</td>
-      <td>99.0</td>
+      <th>1034</th>
+      <td>2020-09-22T03:30:11.221Z</td>
+      <td>C:\Program Files (x86)\Microsoft Office\root\O...</td>
+      <td>"C:\Program Files (x86)\Microsoft Office\root\...</td>
+      <td>69.0</td>
     </tr>
     <tr>
-      <th>649</th>
-      <td>2020-05-02T02:56:05.830Z</td>
-      <td>C:\Windows\System32\cmd.exe</td>
-      <td>"C:\windows\system32\cmd.exe"</td>
-      <td>29.0</td>
+      <th>1181</th>
+      <td>2020-09-22T03:30:11.292Z</td>
+      <td>C:\Program Files (x86)\Microsoft Office\root\O...</td>
+      <td>"C:\Program Files (x86)\Microsoft Office\Root\...</td>
+      <td>80.0</td>
     </tr>
     <tr>
-      <th>827</th>
-      <td>2020-05-02T02:56:15.884Z</td>
-      <td>C:\Windows\System32\WindowsPowerShell\v1.0\pow...</td>
-      <td>powershell</td>
-      <td>10.0</td>
+      <th>5019</th>
+      <td>2020-09-22T03:31:11.219Z</td>
+      <td>C:\Windows\System32\sc.exe</td>
+      <td>"C:\windows\system32\sc.exe" \\WORKSTATION6 st...</td>
+      <td>55.0</td>
     </tr>
     <tr>
-      <th>3620</th>
-      <td>2020-05-02T02:57:02.831Z</td>
-      <td>C:\Windows\System32\SearchProtocolHost.exe</td>
-      <td>"C:\windows\system32\SearchProtocolHost.exe" G...</td>
-      <td>308.0</td>
+      <th>5315</th>
+      <td>2020-09-22T03:31:41.475Z</td>
+      <td>C:\Windows\System32\sc.exe</td>
+      <td>"C:\windows\system32\sc.exe" \\WORKSTATION6 qu...</td>
+      <td>56.0</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+      <th>5552</th>
+      <td>2020-09-22T03:32:02.675Z</td>
+      <td>C:\Windows\System32\svchost.exe</td>
+      <td>C:\windows\system32\svchost.exe -k netsvcs -p ...</td>
+      <td>55.0</td>
     </tr>
     <tr>
-      <th>193780</th>
-      <td>2020-05-02T03:25:33.847Z</td>
-      <td>C:\Windows\System32\UsoClient.exe</td>
-      <td>C:\windows\system32\usoclient.exe StartScan</td>
-      <td>43.0</td>
-    </tr>
-    <tr>
-      <th>193812</th>
-      <td>2020-05-02T03:25:33.858Z</td>
-      <td>C:\Windows\System32\usocoreworker.exe</td>
-      <td>C:\Windows\System32\usocoreworker.exe -Embedding</td>
-      <td>48.0</td>
-    </tr>
-    <tr>
-      <th>194036</th>
-      <td>2020-05-02T03:25:50.013Z</td>
-      <td>C:\Windows\System32\taskhostw.exe</td>
-      <td>taskhostw.exe Logon</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>194568</th>
-      <td>2020-05-02T03:26:12.287Z</td>
-      <td>C:\Windows\System32\UsoClient.exe</td>
-      <td>C:\windows\system32\usoclient.exe StartScan</td>
-      <td>43.0</td>
-    </tr>
-    <tr>
-      <th>194596</th>
-      <td>2020-05-02T03:26:12.298Z</td>
-      <td>C:\Windows\System32\usocoreworker.exe</td>
-      <td>C:\Windows\System32\usocoreworker.exe -Embedding</td>
-      <td>48.0</td>
+      <th>5673</th>
+      <td>2020-09-22T03:32:02.741Z</td>
+      <td>C:\Windows\System32\sc.exe</td>
+      <td>"C:\windows\system32\sc.exe" \\WORKSTATION6 st...</td>
+      <td>56.0</td>
     </tr>
   </tbody>
 </table>
-<p>447 rows × 4 columns</p>
 </div></div></div>
 </div>
 </div>
@@ -1139,16 +918,16 @@ memory usage: 580.4+ MB
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "pyspark3"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "pyspark3",
+            kernelName: "python3",
             path: "./conceptos-basicos"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'pyspark3'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

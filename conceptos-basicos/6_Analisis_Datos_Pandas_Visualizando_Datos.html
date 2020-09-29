@@ -295,16 +295,16 @@
 <li><p><strong>Proyecto</strong>: Infosec Jupyter Book</p></li>
 <li><p><strong>Organización Pública</strong>: <a class="reference external" href="https://github.com/OTRF">Open Threat Research</a></p></li>
 <li><p><strong>Licencia</strong>: <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p></li>
-<li><p><strong>Referencia</strong>: https://github.com/OTRF/mordor/tree/master/datasets/large/apt29/day1</p></li>
+<li><p><strong>Referencia</strong>: https://mordordatasets.com/notebooks/small/windows/05_defense_evasion/SDWIN-190403133337.html</p></li>
 </ul>
 <div class="section" id="representando-el-archivo-json-como-dataframe-usando-pandas">
 <h2>Representando el Archivo JSON como Dataframe usando Pandas<a class="headerlink" href="#representando-el-archivo-json-como-dataframe-usando-pandas" title="Permalink to this headline">¶</a></h2>
 <p>La representación del archivo JSON como un Dataframe de Pandas puede involucrar el uso de comandos como <strong>wget</strong>, <strong>unzip</strong>. Esto fue explicado con más detalle en el notebook que lleva por título <strong>Representando el Archivo JSON como Dataframe usando Pandas</strong>, y además se encuentra en la misma carpeta del presente notebook. Para mantener la estructura del presente notebok en un formato simple, los JSON files requeridos para este workshop ya han sido desargados y descomprimidos. Estos archivos se encuentran en la carpeta <strong>sets_datos</strong>.</p>
-<p>! wget https://github.com/OTRF/mordor/raw/master/datasets/large/apt29/day1/apt29_evals_day1_manual.zip  -O sets_datos/apt29_evals_day1_manual.zip</p>
-<p>! unzip -o sets_datos/apt29_evals_day1_manual.zip -d sets_datos/</p>
+<p>! wget https://raw.githubusercontent.com/OTRF/mordor/master/datasets/small/windows/lateral_movement/host/empire_shell_dcerpc_smb_service_dll_hijack.zip  -O sets_datos/empire_shell_dcerpc_smb_service_dll_hijack.zip</p>
+<p>! unzip -o sets_datos/empire_shell_dcerpc_smb_service_dll_hijack.zip -d sets_datos/</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apt29_json</span> <span class="o">=</span> <span class="s1">&#39;sets_datos/apt29_evals_day1_manual_2020-05-01225525.json&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dllhijack_json</span> <span class="o">=</span> <span class="s1">&#39;sets_datos/empire_shell_dcerpc_smb_service_dll_hijack_2020-09-21232839.json&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -325,22 +325,179 @@
 <p>Referencia: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reading the json file using read_json method and considering the parameter lines = True</span>
-<span class="c1"># setting the chunksize parameter = 1000</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">apt29_json</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="c1"># creating an empty list to store data for every chunk</span>
-<span class="n">apt29_chunks</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1"># adding data of every chunk to an empty list using a for loop and the append method</span>
-<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
-    <span class="n">apt29_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-<span class="c1"># putting everything together into a Pandas dataframe using the concat method</span>
-<span class="c1"># considering the parameter sort = False</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">apt29_chunks</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">path_or_buf</span> <span class="o">=</span> <span class="n">dllhijack_json</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Keywords</th>
+      <th>SeverityValue</th>
+      <th>TargetObject</th>
+      <th>EventTypeOrignal</th>
+      <th>EventID</th>
+      <th>ProviderGuid</th>
+      <th>ExecutionProcessID</th>
+      <th>host</th>
+      <th>Channel</th>
+      <th>UserID</th>
+      <th>...</th>
+      <th>KeyType</th>
+      <th>ClientProcessId</th>
+      <th>AlgorithmName</th>
+      <th>ReturnCode</th>
+      <th>KeyName</th>
+      <th>KeyFilePath</th>
+      <th>MiniportNameLen</th>
+      <th>MiniportName</th>
+      <th>param4</th>
+      <th>param3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>HKU\.DEFAULT\Software\Microsoft\Office\16.0\Co...</td>
+      <td>INFO</td>
+      <td>13</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3172</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3392</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-9223372036854775808</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10</td>
+      <td>{5770385F-C22A-43E0-BF4C-06F5698FFBD9}</td>
+      <td>3392</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>Microsoft-Windows-Sysmon/Operational</td>
+      <td>S-1-5-18</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-9214364837600034816</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5158</td>
+      <td>{54849625-5478-4994-A5BA-3E3B0328C30D}</td>
+      <td>4</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>security</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-9214364837600034816</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5156</td>
+      <td>{54849625-5478-4994-A5BA-3E3B0328C30D}</td>
+      <td>4</td>
+      <td>wec.internal.cloudapp.net</td>
+      <td>security</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 206 columns</p>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="c-conociendo-las-columnas-o-atributos-del-dataframe">
@@ -350,6 +507,223 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 6349 entries, 0 to 6348
+Data columns (total 206 columns):
+ #   Column                     Dtype  
+---  ------                     -----  
+ 0   Keywords                   int64  
+ 1   SeverityValue              int64  
+ 2   TargetObject               object 
+ 3   EventTypeOrignal           object 
+ 4   EventID                    int64  
+ 5   ProviderGuid               object 
+ 6   ExecutionProcessID         int64  
+ 7   host                       object 
+ 8   Channel                    object 
+ 9   UserID                     object 
+ 10  AccountType                object 
+ 11  ThreadID                   int64  
+ 12  ProcessGuid                object 
+ 13  Details                    object 
+ 14  EventReceivedTime          object 
+ 15  Opcode                     object 
+ 16  EventTime                  object 
+ 17  @timestamp                 object 
+ 18  SourceModuleType           object 
+ 19  port                       int64  
+ 20  AccountName                object 
+ 21  RecordNumber               int64  
+ 22  Task                       int64  
+ 23  Domain                     object 
+ 24  @version                   int64  
+ 25  OpcodeValue                float64
+ 26  SourceModuleName           object 
+ 27  Severity                   object 
+ 28  SourceName                 object 
+ 29  Version                    float64
+ 30  Image                      object 
+ 31  Category                   object 
+ 32  UtcTime                    object 
+ 33  Hostname                   object 
+ 34  RuleName                   object 
+ 35  tags                       object 
+ 36  SourceImage                object 
+ 37  SourceProcessGUID          object 
+ 38  TargetImage                object 
+ 39  GrantedAccess              object 
+ 40  EventType                  object 
+ 41  SourceProcessId            object 
+ 42  SourceThreadId             float64
+ 43  TargetProcessGUID          object 
+ 44  TargetProcessId            object 
+ 45  CallTrace                  object 
+ 46  Application                object 
+ 47  ProcessId                  object 
+ 48  Message                    object 
+ 49  FilterRTID                 float64
+ 50  LayerRTID                  float64
+ 51  Protocol                   object 
+ 52  SourcePort                 float64
+ 53  LayerName                  object 
+ 54  SourceAddress              object 
+ 55  RemoteUserID               object 
+ 56  Direction                  object 
+ 57  DestPort                   float64
+ 58  DestAddress                object 
+ 59  RemoteMachineID            object 
+ 60  ActivityID                 object 
+ 61  Payload                    object 
+ 62  ERROR_EVT_UNRESOLVED       float64
+ 63  ContextInfo                object 
+ 64  ImageLoaded                object 
+ 65  Signed                     object 
+ 66  SignatureStatus            object 
+ 67  Hashes                     object 
+ 68  Description                object 
+ 69  Company                    object 
+ 70  FileVersion                object 
+ 71  Signature                  object 
+ 72  Product                    object 
+ 73  OriginalFileName           object 
+ 74  SubjectDomainName          object 
+ 75  SubjectUserSid             object 
+ 76  SubjectLogonId             object 
+ 77  TaskContentNew             object 
+ 78  SubjectUserName            object 
+ 79  TaskName                   object 
+ 80  ProcessName                object 
+ 81  Status                     object 
+ 82  RuleAttr                   object 
+ 83  RuleId                     object 
+ 84  ChangeType                 object 
+ 85  FilterKey                  object 
+ 86  FilterType                 object 
+ 87  FilterName                 object 
+ 88  Weight                     float64
+ 89  UserName                   object 
+ 90  LayerId                    float64
+ 91  Action                     object 
+ 92  CalloutKey                 object 
+ 93  CalloutName                object 
+ 94  FilterId                   float64
+ 95  UserSid                    object 
+ 96  ProviderName               object 
+ 97  LayerKey                   object 
+ 98  ProviderKey                object 
+ 99  Conditions                 object 
+ 100 PrivilegeList              object 
+ 101 TargetLogonId              object 
+ 102 LogonType                  float64
+ 103 VirtualAccount             object 
+ 104 LogonGuid                  object 
+ 105 AuthenticationPackageName  object 
+ 106 IpAddress                  object 
+ 107 TransmittedServices        object 
+ 108 LmPackageName              object 
+ 109 ImpersonationLevel         object 
+ 110 ElevatedToken              object 
+ 111 WorkstationName            object 
+ 112 TargetOutboundUserName     object 
+ 113 TargetOutboundDomainName   object 
+ 114 LogonProcessName           object 
+ 115 KeyLength                  float64
+ 116 TargetLinkedLogonId        object 
+ 117 RestrictedAdminMode        object 
+ 118 TargetUserName             object 
+ 119 IpPort                     object 
+ 120 TargetUserSid              object 
+ 121 TargetDomainName           object 
+ 122 EventIdx                   float64
+ 123 GroupMembership            object 
+ 124 EventCountTotal            float64
+ 125 TargetFilename             object 
+ 126 CreationUtcTime            object 
+ 127 SourceHandleId             object 
+ 128 TargetHandleId             object 
+ 129 ObjectServer               object 
+ 130 HandleId                   object 
+ 131 TransactionId              object 
+ 132 AccessMask                 object 
+ 133 ObjectName                 object 
+ 134 ObjectType                 object 
+ 135 AccessReason               object 
+ 136 AccessList                 object 
+ 137 RestrictedSidCount         float64
+ 138 ResourceAttributes         object 
+ 139 EnabledPrivilegeList       object 
+ 140 DisabledPrivilegeList      object 
+ 141 ShareName                  object 
+ 142 ShareLocalPath             object 
+ 143 RelativeTargetName         object 
+ 144 SourcePortName             object 
+ 145 DestinationPort            float64
+ 146 User                       object 
+ 147 SourceHostname             object 
+ 148 DestinationIp              object 
+ 149 SourceIp                   object 
+ 150 DestinationIsIpv6          object 
+ 151 Initiated                  object 
+ 152 SourceIsIpv6               object 
+ 153 DestinationPortName        object 
+ 154 DestinationHostname        object 
+ 155 ParentImage                object 
+ 156 CommandLine                object 
+ 157 CurrentDirectory           object 
+ 158 IntegrityLevel             object 
+ 159 TerminalSessionId          float64
+ 160 ParentProcessGuid          object 
+ 161 ParentCommandLine          object 
+ 162 ParentProcessId            float64
+ 163 LogonId                    object 
+ 164 Device                     object 
+ 165 NewSd                      object 
+ 166 OldSd                      object 
+ 167 MandatoryLabel             object 
+ 168 ParentProcessName          object 
+ 169 NewProcessName             object 
+ 170 TokenElevationType         object 
+ 171 NewProcessId               object 
+ 172 PipeName                   object 
+ 173 Properties                 object 
+ 174 OperationType              object 
+ 175 AdditionalInfo             object 
+ 176 Path                       object 
+ 177 Priority                   float64
+ 178 Service                    object 
+ 179 ServiceName                object 
+ 180 TicketEncryptionType       object 
+ 181 ServiceSid                 object 
+ 182 TicketOptions              object 
+ 183 QueryResults               object 
+ 184 QueryName                  object 
+ 185 QueryStatus                float64
+ 186 IsExecutable               object 
+ 187 Archived                   object 
+ 188 param1                     object 
+ 189 param2                     object 
+ 190 MessageNumber              float64
+ 191 ScriptBlockText            object 
+ 192 MessageTotal               float64
+ 193 ScriptBlockId              object 
+ 194 Operation                  object 
+ 195 ClientCreationTime         object 
+ 196 KeyType                    object 
+ 197 ClientProcessId            float64
+ 198 AlgorithmName              object 
+ 199 ReturnCode                 object 
+ 200 KeyName                    object 
+ 201 KeyFilePath                object 
+ 202 MiniportNameLen            float64
+ 203 MiniportName               object 
+ 204 param4                     object 
+ 205 param3                     object 
+dtypes: float64(25), int64(9), object(172)
+memory usage: 10.0+ MB
 </pre></div>
 </div>
 </div>
@@ -370,11 +744,8 @@
 <span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EventID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Channel&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;sysmon&#39;</span><span class="p">,</span><span class="n">case</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">regex</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))]</span>
     
 <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Command_Length</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;CommandLine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">())</span>
-    
-<span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Command_Length&#39;</span><span class="p">]</span> <span class="o">&lt;</span><span class="mi">300</span><span class="p">]</span>
-
 <span class="p">)</span>
-<span class="n">df</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Command_Length&#39;</span><span class="p">]</span> <span class="o">&lt;</span><span class="mi">300</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -407,6 +778,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6_Analisis_Datos_Pandas_Visualizando_Datos_20_0.png" src="../_images/6_Analisis_Datos_Pandas_Visualizando_Datos_20_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -427,16 +801,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "pyspark3"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "pyspark3",
+            kernelName: "python3",
             path: "./conceptos-basicos"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'pyspark3'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

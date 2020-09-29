@@ -17,36 +17,45 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# reading the json file using read_json method and considering the parameter lines = True
-# setting the chunksize parameter = 1000
-df = pd.read_json(apt29_json, lines = True, chunksize = 1000)
-# creating an empty list to store data for every chunk
-apt29_chunks = []
-# adding data of every chunk to an empty list using a for loop and the append method
-for chunk in df:
-    apt29_chunks.append(chunk)
-# putting everything together into a Pandas dataframe using the concat method
-# considering the parameter sort = False
-df = pd.concat(apt29_chunks, sort = False)
+df = pd.read_json(path_or_buf = dllhijack_json, lines = True)
 
 df.head()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m<ipython-input-3-326633ad7c40>[0m in [0;36m<module>[0;34m[0m
-[1;32m      5[0m [0mapt29_chunks[0m [0;34m=[0m [0;34m[[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m      6[0m [0;31m# adding data of every chunk to an empty list using a for loop and the append method[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 7[0;31m [0;32mfor[0m [0mchunk[0m [0;32min[0m [0mdf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      8[0m     [0mapt29_chunks[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mchunk[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      9[0m [0;31m# putting everything together into a Pandas dataframe using the concat method[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-3-33e4c1dcbc92>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mdf[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_json[0m[0;34m([0m[0mpath_or_buf[0m [0;34m=[0m [0mdllhijack_json[0m[0;34m,[0m [0mlines[0m [0;34m=[0m [0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;34m[0m[0m
+[1;32m      3[0m [0mdf[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/usr/local/lib/python3.8/site-packages/pandas/io/json/_json.py[0m in [0;36m__next__[0;34m(self)[0m
-[1;32m    806[0m         [0;32mif[0m [0mlines[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    807[0m             [0mlines_json[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_combine_lines[0m[0;34m([0m[0mlines[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 808[0;31m             [0mobj[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_get_object_parser[0m[0;34m([0m[0mlines_json[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    809[0m [0;34m[0m[0m
-[1;32m    810[0m             [0;31m# Make sure that the returned objects have the right index.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/usr/local/lib/python3.8/site-packages/pandas/util/_decorators.py[0m in [0;36mwrapper[0;34m(*args, **kwargs)[0m
+[1;32m    197[0m                 [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    198[0m                     [0mkwargs[0m[0;34m[[0m[0mnew_arg_name[0m[0;34m][0m [0;34m=[0m [0mnew_arg_value[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 199[0;31m             [0;32mreturn[0m [0mfunc[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    200[0m [0;34m[0m[0m
+[1;32m    201[0m         [0;32mreturn[0m [0mcast[0m[0;34m([0m[0mF[0m[0;34m,[0m [0mwrapper[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.8/site-packages/pandas/util/_decorators.py[0m in [0;36mwrapper[0;34m(*args, **kwargs)[0m
+[1;32m    294[0m                 )
+[1;32m    295[0m                 [0mwarnings[0m[0;34m.[0m[0mwarn[0m[0;34m([0m[0mmsg[0m[0;34m,[0m [0mFutureWarning[0m[0;34m,[0m [0mstacklevel[0m[0;34m=[0m[0mstacklevel[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 296[0;31m             [0;32mreturn[0m [0mfunc[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    297[0m [0;34m[0m[0m
+[1;32m    298[0m         [0;32mreturn[0m [0mwrapper[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.8/site-packages/pandas/io/json/_json.py[0m in [0;36mread_json[0;34m(path_or_buf, orient, typ, dtype, convert_axes, convert_dates, keep_default_dates, numpy, precise_float, date_unit, encoding, lines, chunksize, compression, nrows)[0m
+[1;32m    616[0m         [0;32mreturn[0m [0mjson_reader[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    617[0m [0;34m[0m[0m
+[0;32m--> 618[0;31m     [0mresult[0m [0;34m=[0m [0mjson_reader[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    619[0m     [0;32mif[0m [0mshould_close[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    620[0m         [0mfilepath_or_buffer[0m[0;34m.[0m[0mclose[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.8/site-packages/pandas/io/json/_json.py[0m in [0;36mread[0;34m(self)[0m
+[1;32m    751[0m                 [0mdata[0m [0;34m=[0m [0mensure_str[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    752[0m                 [0mdata[0m [0;34m=[0m [0mdata[0m[0;34m.[0m[0msplit[0m[0;34m([0m[0;34m"\n"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 753[0;31m                 [0mobj[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_get_object_parser[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_combine_lines[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    754[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    755[0m             [0mobj[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_get_object_parser[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/usr/local/lib/python3.8/site-packages/pandas/io/json/_json.py[0m in [0;36m_get_object_parser[0;34m(self, json)[0m
 [1;32m    775[0m         [0mobj[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
