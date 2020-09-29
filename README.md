@@ -4,7 +4,6 @@
 [![Open_Threat_Research Community](https://img.shields.io/badge/Open_Threat_Research-Community-brightgreen.svg)](https://twitter.com/OTR_Community)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-
 Desde una perspectiva de seguridad defensiva, incluso después de comprender cómo simular el comportamiento de un adversario y generar data en un ambiente de prueba, puede que aún no tengas claro cómo empezar a analizar los datos que has recolectado. En algunos casos, puede que necesites filtrar, transformar, correlacionar y visualizar los datos con el objetivo de definir una lógica de detección efectiva. En este workshop compartiremos técnicas básicas de análisis de datos usando herramientas como Jupyter Notebooks y Pandas, las cuales son open source y pueden interactuar con diferentes aplicaciones. Además, estas herramientas son usadas por organizaciones a gran escala, pero también pueden ser configuradas en la comodidad de tu hogar y en forma gratuita.
 
 ## Facilitadores
@@ -21,6 +20,10 @@ Desde una perspectiva de seguridad defensiva, incluso después de comprender có
 ## Jupyter Book
 
 ## [https://otrf.github.io/workshop-ekoparty-bluespace-2020/intro.html](https://otrf.github.io/workshop-ekoparty-bluespace-2020/intro.html)
+
+## Slides
+
+## [https://github.com/OTRF/workshop-ekoparty-bluespace-2020/blob/master/Jupyter-BlueSpace-Slides-2020.pdf](https://github.com/OTRF/workshop-ekoparty-bluespace-2020/blob/master/Jupyter-BlueSpace-Slides-2020.pdf)
 
 ## Agenda
 
@@ -62,7 +65,7 @@ Desde una perspectiva de seguridad defensiva, incluso después de comprender có
     <tr>
       <td>
         <ul>
-          <li>INecesitamos datos? (El proyecto Mordor)
+          <li>Necesitamos datos? (El proyecto Mordor)
             <ul>
               <li>Obteniendo sets de datos</li>
               <li>Representando los datos como Pandas Dataframe</li>
